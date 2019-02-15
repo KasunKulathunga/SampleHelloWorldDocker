@@ -6,12 +6,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/abc")
+@RequestMapping("/api")
 public class TestController {
 
     @GetMapping("/hi")
     public String getHi() {
+        final String uri = "http://localhost:5052/api/hi";
 
-        return "hello world";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(uri, String.class);
+        return "hello world"+ ":"+result;
     }
 }
